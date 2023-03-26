@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjc.smarthome.mapper.iot.PersonMapper">
+    <resultMap id="BaseResultMap" type="com.wjc.smarthome.enetity.iot.Person">
+        <!--@mbg.generated-->
+        <!--@Table person-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, username, `password`, area, phone
+    </sql>
+    <insert id="register">
+    insert into device_relation_person(device_id,person_id,preson_phone)
+    value (#{device.id}, #{person.id}, #{person.phone})
+    </insert>
+</mapper>

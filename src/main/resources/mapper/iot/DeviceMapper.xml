@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjc.smarthome.mapper.iot.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.wjc.smarthome.enetity.iot.Device">
+    <!--@mbg.generated-->
+    <!--@Table device-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_key" jdbcType="VARCHAR" property="productKey" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="device_secret" jdbcType="VARCHAR" property="deviceSecret" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="iot_id" jdbcType="VARCHAR" property="iotId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, product_key, device_name, device_status, device_secret, nick_name, iot_id
+  </sql>
+</mapper>

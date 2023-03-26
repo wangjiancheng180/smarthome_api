@@ -1,0 +1,68 @@
+server:
+  port: 2023
+  servlet:
+    context-path: /api
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_smarthome?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&&useUnicode=true
+    username: root
+    password: 123456
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0ms
+    database: 1
+
+
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*/*.xml
+  checkConfigLocation: true    #是否检查mapper.xml文件存在
+  global-config:
+    db-config:
+      id-type: auto           #id自增
+      field-strategy: ignored
+      column-like: true
+    refresh: true
+  configuration:
+    map-underscore-to-camel-case: true     #驼峰映射
+    cache-enabled: true
+    lazy-loading-enabled: false
+    multiple-result-sets-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #打印sql语句
+
+security:
+  salt: 20230222
+  token:       #token配置
+    header: Authorization #令牌自定义标识
+    secret: wjc-key #令牌密钥
+    expireTime: 10080 #令牌有效期 默认10080分钟 7天
+
+
+#iot配置
+iot:
+  amq:
+    consumerGroupId: DEFAULT_GROUP
+    clientId: wjc
+    host: ${ALIOTHOST}
+  accessKey: ${ALIOTACCESSKEY}
+  accessSecret: ${ALIOTACCESSSECRET}
+  iotInstanceId: ${ALIOTINSTANCEID}
+  productKey: ${ALPRODUCTKEY}

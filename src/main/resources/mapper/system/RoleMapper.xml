@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjc.smarthome.mapper.system.RoleMapper">
+    <resultMap id="sysRoleDto" type="com.wjc.smarthome.dto.system.SysRoleDto">
+        <id column="role_id" property="id"/>
+        <result column="role_name" property="name"/>
+        <result column="role_key" property="roleKey"/>
+        <result column="status" property="status"/>
+        <result column="role_sort" property="sort"/>
+        <result column="description" property="description"/>
+        <collection property="resourceList" ofType="com.wjc.smarthome.dto.system.SysResourceDto">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="source_key" property="sourceKey"/>
+            <result column="source_url" property="sourceUrl"/>
+            <result column="level" property="level"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="sort" property="sort"/>
+            <result column="type" property="type"/>
+            <result column="icon" property="icon"/>
+        </collection>
+    </resultMap>
+    <insert id="contactResourceIds">
+        insert into role_relation_resource(role_id, resource_id) values
+        <foreach collection="resourceIds" item="resourceId" separator=",">
+            (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+    <delete id="removeRoleContactResource">
+        delete
+        from role_relation_resource
+        where role_id = #{roleId,jdbcType=BIGINT}
+    </delete>
+    <select id="queryRoleById" resultMap="sysRoleDto">
+        select ro.id role_id, ro.name role_name, ro.role_key, ro.sort role_sort, ro.status, ro.description, res.*
+        from role ro
+                     left join role_relation_resource r on ro.id = r.role_id
+                     left join sys_resource res on res.id = r.resource_id
+        where ro.id = #{roleId,jdbcType=BIGINT}
+    </select>
+    <select id="countUser" resultType="int">
+        select count(1)
+        from user_info_relation_role
+        where role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+    <select id="queryMenu" resultType="com.wjc.smarthome.dto.system.SysResourceDto">
+        select sr.id,
+               sr.name,
+               sr.parent_id,
+               sr.source_key,
+               sr.source_url,
+               sr.type,
+               sr.icon,
+               sr.sort
+        from sys_resource sr
+                     inner join role_relation_resource r on sr.id = r.resource_id
+                where r.role_id in
+        <foreach open="(" close=")" separator="," collection="roleIds" item="id">
+            #{id}
+        </foreach>
+        and sr.type = 1
+                order by sr.sort
+    </select>
+    <select id="queryContactResourceIds" resultType="java.lang.Long">
+        select resource_id
+        from role_relation_resource
+        where role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+    <select id="getUsernameByRoleId" resultType="java.lang.String">
+        select u.username from user_info u inner join user_info_relation_role ur on u.id = ur.user_info_id
+        where ur.role_id = #{roleId,jdbcType=BIGINT}
+    </select>
+</mapper>

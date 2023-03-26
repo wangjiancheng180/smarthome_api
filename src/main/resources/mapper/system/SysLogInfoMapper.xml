@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjc.smarthome.mapper.system.SysLogInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wjc.smarthome.enetity.system.SysLogInfo">
+    <!--@mbg.generated-->
+    <!--@Table sys_log_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="log_type" jdbcType="INTEGER" property="logType" />
+    <result column="operate_type" jdbcType="INTEGER" property="operateType" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, ip, `method`, `module`, log_type, operate_type, url, params, create_user_id, 
+    create_user_name, update_user_id, update_user_name, create_time, update_time, start_time, 
+    end_time
+  </sql>
+</mapper>

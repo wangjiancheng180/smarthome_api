@@ -6,7 +6,7 @@ import com.wjc.smarthome.enetity.system.UserInfo;
 import com.wjc.smarthome.service.system.SysResourceService;
 import com.wjc.smarthome.service.system.UserInfoService;
 import com.wjc.smarthome.service.RedisService;
-import com.wjc.smarthome.util.JwtToken;
+import com.wjc.smarthome.shiro.token.JwtToken;
 import com.wjc.smarthome.util.TokenUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

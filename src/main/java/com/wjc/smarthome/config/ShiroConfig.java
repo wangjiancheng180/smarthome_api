@@ -3,6 +3,7 @@ package com.wjc.smarthome.config;
 import com.wjc.smarthome.shiro.filter.TokenFilter;
 import com.wjc.smarthome.shiro.matcher.JwtMatcher;
 import com.wjc.smarthome.shiro.realm.JwtRealm;
+import com.wjc.smarthome.shiro.realm.PersonRealm;
 import com.wjc.smarthome.shiro.realm.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
@@ -34,6 +35,8 @@ public class ShiroConfig {
     public  JwtRealm jwtRealm(){
         return new JwtRealm();
     }
+    @Bean
+    public PersonRealm personRealm(){return new PersonRealm();}
 
     @Bean
     public JwtMatcher jwtMatcher(){return new JwtMatcher();}
@@ -57,8 +60,10 @@ public class ShiroConfig {
         matcher.setHashIterations(3);
         UserRealm userRealm = userRealm();
         JwtRealm jwtRealm = jwtRealm();
+        PersonRealm personRealm = personRealm();
         //设置userRealm的密码匹配
         userRealm.setCredentialsMatcher(matcher);
+        personRealm.setCredentialsMatcher(matcher);
         //将token的密码匹配换成自己的
         jwtRealm.setCredentialsMatcher(jwtMatcher());
 //        jwtRealm.setCredentialsMatcher(matcher);
@@ -66,6 +71,7 @@ public class ShiroConfig {
         List<Realm> realms = new ArrayList<>();
         realms.add(userRealm);
         realms.add(jwtRealm);
+        realms.add(personRealm);
         manager.setRealms(realms);
 //        manager.setRealm(userRealm);
 //        manager.setRealm(jwtRealm);
@@ -97,6 +103,8 @@ public class ShiroConfig {
         filterRuleMap.put("/v2/**","anon");
         filterRuleMap.put("/doc.html","anon");
         filterRuleMap.put("/auth/login","anon");
+        filterRuleMap.put("/min/login","anon");
+        filterRuleMap.put("/min/register","anon");
         filterRuleMap.put("/**","token");
         filterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
 

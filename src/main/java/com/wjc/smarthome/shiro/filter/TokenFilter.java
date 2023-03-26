@@ -3,7 +3,7 @@ package com.wjc.smarthome.shiro.filter;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.wjc.smarthome.common.JsonResult;
-import com.wjc.smarthome.util.JwtToken;
+import com.wjc.smarthome.shiro.token.JwtToken;
 import com.wjc.smarthome.util.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;

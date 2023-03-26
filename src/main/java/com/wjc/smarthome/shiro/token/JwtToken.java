@@ -1,4 +1,4 @@
-package com.wjc.smarthome.util;
+package com.wjc.smarthome.shiro.token;
 
 import org.apache.shiro.authc.AuthenticationToken;
 

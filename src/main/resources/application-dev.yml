@@ -29,6 +29,11 @@ spring:
     lettuce:
       shutdown-timeout: 0ms
     database: 1
+  influx:
+    url: http://127.0.0.1:8086
+    user: root
+    password: root
+    database: smarthome_data
 
 
 
@@ -59,7 +64,7 @@ security:
 #iot配置
 iot:
   amq:
-    consumerGroupId: DEFAULT_GROUP
+    consumerGroupId: Fcz5ytsnFKCWV5FcLniV000100
     clientId: wjc
     host: ${ALIOTHOST}
   accessKey: ${ALIOTACCESSKEY}

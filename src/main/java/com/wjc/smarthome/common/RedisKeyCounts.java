@@ -24,5 +24,19 @@ public interface RedisKeyCounts {
          * 离线设备列表
          */
         String DEVICES_OFFLINE = "devices:offline";
+        /**
+         * 用户绑定设备的信息
+         */
+        String DEVICE_USER = "device:user";
+
+        /**
+         *设备数据的前缀
+         */
+        String DEVICE_DATA_PREFIX =  "device:data:";
+    }
+
+    interface MessageChannel{
+        String DEVICE_INFO = "deviceInfo";
+
     }
 }

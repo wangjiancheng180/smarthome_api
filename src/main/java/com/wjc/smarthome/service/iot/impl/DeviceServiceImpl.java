@@ -243,5 +243,15 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
         return JsonResult.success(devices);
     }
 
+    @Override
+    public Device findByUsername(String username) {
+        Device device = redisService.get(RedisKeyCounts.DeviceKeys.DEVICE_USER, username, Device.class);
+        if (device == null){
+            device = baseMapper.findByUsername(username);
+            redisService.save(RedisKeyCounts.DeviceKeys.DEVICE_USER, username,device);
+        }
+        return device;
+    }
+
 
 }

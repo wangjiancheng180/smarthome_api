@@ -15,7 +15,7 @@
         id, username, `password`, area, phone
     </sql>
     <insert id="register">
-    insert into device_relation_person(device_id,person_id,preson_phone)
+    insert into device_relation_person(device_id,person_id,person_phone)
     value (#{device.id}, #{person.id}, #{person.phone})
     </insert>
 </mapper>

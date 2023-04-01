@@ -30,4 +30,6 @@ public interface DeviceService extends IService<Device>{
     JsonResult<List<Device>> queryOnlineDevice();
 
     JsonResult<List<Device>> queryOfflineDevice();
+
+    Device findByUsername(String username);
 }

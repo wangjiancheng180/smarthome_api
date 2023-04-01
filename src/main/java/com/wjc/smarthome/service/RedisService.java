@@ -115,20 +115,20 @@ public class RedisService {
      */
     public <T> List<T> getList(String hash,String key,Class<T> beanClass){
         Object cache = redisTemplate.opsForHash().get(hash, key);
-
         return Optional.ofNullable(cache).map(e -> JSONUtil.toList((String) e, beanClass)).orElse(null);
-
-
-//        try {
-//            return JSONUtil.toList((String) Optional.ofNullable(cache).get(),beanClass);
-//        }catch (NoSuchElementException e){
-//            log.warn("redis获取{}-->{}值为空，缓存未命中！",hash,key);
-//            return null;
-//        }
     }
 
 
     public Set<Object> getFileds(String hash) {
       return  redisTemplate.opsForHash().keys(hash);
+    }
+
+    /**
+     * redis发布消息
+     * @param channel
+     * @param message
+     */
+    public void sendMessage(String channel,Object message){
+        redisTemplate.convertAndSend(channel,message);
     }
 }

@@ -1,5 +1,6 @@
 package com.wjc.smarthome.util;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.KeyUtil;
 import cn.hutool.jwt.Claims;
 import cn.hutool.jwt.JWT;
@@ -51,6 +52,9 @@ public class TokenUtils {
 
 
     public static boolean verify(String token){
+        if (StrUtil.isEmpty(token)){
+            return false;
+        }
         byte[] key = secret.getBytes();
         return JWT.of(token).setKey(key).validate(0);
     }
